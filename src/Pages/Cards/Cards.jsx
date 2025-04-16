@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import Book from "../Book/Book";
 
-const Cards = () => {
-    const [cardData,setCardDara] = useState([]);
 
-    useEffect(()=>{
-        fetch('https://raw.githubusercontent.com/ProgrammingHero1/boi-poka-Book-Vibe-Resources/refs/heads/main/data/booksData.json')
-        .then(res => res.json())
-        .then(data => setCardDara(data))
-    },[]);
-    console.log(cardData);
+const Cards = ({data}) => {
+    
     return (
         <div>
-            <h1>this card containe</h1>
+            <h1 className="text-3xl font-bold text-center">BOOKS: {data.length}</h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-11/12 mx-auto my-8">
+                {
+                    data.map(book => <Book key={book.bookId}
+                    book={book}></Book>)
+                }
+            </div>
         </div>
     );
 };
