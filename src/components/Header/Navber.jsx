@@ -17,6 +17,7 @@ const Navber = () => {
                         <Link to='/'><li>Home</li></Link>
                         
                         <Link to='/about'><li>About</li></Link>
+                        <Link to='/readList'><li>Read List</li></Link>
                     </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">Book Vibe</a>
@@ -26,6 +27,7 @@ const Navber = () => {
                     <Link to='/'><li>Home</li></Link>
                         
                     <Link to='/about'><li>About</li></Link>
+                    <Link to='/readList'><li>Read List</li></Link>
                     </ul>
                 </div>
                 <div className="navbar-end flex gap-4">

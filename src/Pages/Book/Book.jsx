@@ -18,9 +18,7 @@ const Book = ({book}) => {
                     <span className='text-green-400 font-bold'>{category}</span>
                     <h2 className="card-title">{bookName}</h2>
                     <p>by : {author}</p>
-                    <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
-                    </div>
+                    
                 </div>
                 </div>
            </Link>

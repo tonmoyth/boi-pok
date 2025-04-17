@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import { addLocal } from '../../Utility/Utility';
+import { addWishList } from '../../Utility/WishList';
 
 const BookDetails = () => {
     const {bookId} = useParams();
@@ -8,6 +10,14 @@ const BookDetails = () => {
     
     const bookDetail = data.find(book => book.bookId === singleBookId);
     const {image,bookName,author,category,review,tags,totalPages,publisher,yearOfPublishing} = bookDetail;
+
+    const handleReadBtn = (id) => {
+        addLocal(id)
+       
+    }
+    const handleWishBtn = (id) => {
+        addWishList(id);
+    }
 
     return (
         <div>
@@ -22,19 +32,19 @@ const BookDetails = () => {
                     <h2 className="card-title text-3xl">{bookName}!</h2>
                     <span>By : {author}</span>
 
-                    <div class="divider my-0"></div>
+                    <div className="divider my-0"></div>
                     <p>{category}</p>
-                    <div class="divider my-0"></div>
+                    <div className="divider my-0"></div>
                     <p>{review}</p>
                     <div className='flex gap-2 w-1/4 items-center'>
                     <p className='font-bold'>Tag</p>
                     {
-                        tags.map(tag =>  
-                                <p className='text-green-500 p-2 bg-gray-100'>{tag}</p>
+                        tags.map((tag,index) =>  
+                                <p key={index} className='text-green-500 p-2 bg-gray-100'>{tag}</p>
                         )
                     }
                     </div>
-                    <div class="divider my-0"></div>
+                    <div className="divider my-0"></div>
                     <table className='w-1/3'>
                         <tbody>
                             <tr>
@@ -52,8 +62,8 @@ const BookDetails = () => {
                             </tbody>
                     </table>
                     <div className="card-actions flex gap-4  mt-8">
-                    <button className="btn btn-primary">Read</button>
-                    <button className="btn btn-primary bg-[#50B1C9] border-none">Wishlist</button>
+                    <button onClick={() => handleReadBtn(singleBookId)} className="btn btn-primary">Read</button>
+                    <button onClick={() => handleWishBtn(singleBookId)} className="btn btn-primary bg-[#50B1C9] border-none">Wishlist</button>
                     </div>
                 </div>
                 </div>
