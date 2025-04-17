@@ -9,6 +9,8 @@ import { getWishList } from '../../Utility/WishList';
 const ReadList = () => {
     const [readList,setReadList] = useState([]);
     const [wishList,setWishList] = useState([]);
+    const [sort,setSort] = useState('');
+
     const data = useLoaderData();
     useEffect(()=>{
         const getLocalData = getLocal();
@@ -20,10 +22,41 @@ const ReadList = () => {
         const getWishIdFromLoacal = getWishList();
         const wishListData = data.filter(book => getWishIdFromLoacal.includes(book.bookId));
         setWishList(wishListData);
-    },[data])
+    },[data]);
+
+
    
+    const anchorHandle = (type) => {
+        setSort(type);
+        if(type === "pages"){
+            const sortPages = [...readList].sort((a,b)=> a.totalPages - b.totalPages);
+            setReadList(sortPages);
+        }else if(type === "rating"){
+            const sortPages = [...readList].sort((a,b)=> a.rating - b.rating);
+            setReadList(sortPages);
+        }
+    }
     return (
-        <div>wishList
+        <div>
+            
+   
+           <div className='flex flex-col justify-center mt-8'>
+           <div className='flex justify-center'>
+           <button className="btn " popoverTarget="popover-1" style={{ anchorName: "--anchor-1" } /* as React.CSSProperties */}>
+            sort by {sort === 'pages' ? 'pages' : 'rating'}
+            </button>
+           </div>
+
+            <ul className="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+            popover="auto" id="popover-1" style={{ positionAnchor: "--anchor-1" } /* as React.CSSProperties */ }>
+            <li><a onClick={()=>anchorHandle('pages')}>pages</a></li>
+            <li><a onClick={()=>anchorHandle('rating')}>rating</a></li>
+            </ul>
+           </div>
+        
+
+
+
               <Tabs className='w-11/12 mx-auto my-8'>
                     <TabList>
                     <Tab>Read Books</Tab>
@@ -31,7 +64,7 @@ const ReadList = () => {
                     </TabList>
 
                     <TabPanel>
-                    <h2>Read Books</h2>
+                    
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                         {
                             readList.map(book => <Book key={book.bookId} book={book}></Book>)

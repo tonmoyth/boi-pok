@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const Book = ({book}) => {
     
-    const {bookId,image,author,bookName,category} = book;
+    const {bookId,image,author,bookName,category,rating,totalPages} = book;
     
     return (
         <div>
@@ -18,7 +18,8 @@ const Book = ({book}) => {
                     <span className='text-green-400 font-bold'>{category}</span>
                     <h2 className="card-title">{bookName}</h2>
                     <p>by : {author}</p>
-                    
+                    <span>Rating : {rating}</span>
+                    <span>Paged : {totalPages}</span>
                 </div>
                 </div>
            </Link>
